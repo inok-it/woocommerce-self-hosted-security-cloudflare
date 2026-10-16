@@ -1,0 +1,41 @@
+# 1. Protect wp-config.php
+<Files wp-config.php>
+  Require all denied
+</Files>
+
+# 2. Block XML-RPC (Brute-force & DDoS amplification vector)
+<Files xmlrpc.php>
+  Require all denied
+</Files>
+
+# 3. Disable Directory Listing
+Options -Indexes
+
+# 4. Block version-leaking documentation and sample files
+<FilesMatch "^(readme\.html|license\.txt|wp-config-sample\.php)$">
+  Require all denied
+</FilesMatch>
+
+# 5. Block access to hidden dotfiles (e.g., .env, .git, .htaccess)
+<FilesMatch "^\.">
+  Require all denied
+</FilesMatch>
+
+# 6. Block direct PHP execution inside wp-includes (persists across Docker image updates) 
+<IfModule mod_rewrite.c> 
+RewriteEngine On 
+RewriteBase / RewriteRule ^wp-admin/includes/ - [F,L]
+RewriteRule !^wp-includes/ - [S=3]
+RewriteRule ^wp-includes/[^/]+\.php$ - [F,L] 
+RewriteRule ^wp-includes/js/tinymce/langs/.+\.php - [F,L] 
+RewriteRule ^wp-includes/theme-compat/ - [F,L] 
+</IfModule>
+
+# 7. Enforce Application Security Headers (HSTS and nosniff are handled by Cloudflare) 
+<IfModule mod_headers.c>
+ Header always set X-Frame-Options "SAMEORIGIN"
+ Header always set X-XSS-Protection "0"
+ Header always set Referrer-Policy "strict-origin-when-cross-origin"
+ Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=(self)" 
+ Header always set Content-Security-Policy "upgrade-insecure-requests;"
+</IfModule>
