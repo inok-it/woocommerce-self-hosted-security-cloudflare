@@ -7,13 +7,14 @@ Enforce strict transport encryption and protect `/wp-login.php` against automate
 Do not configure SSL/TLS from scratch. Follow the exact baseline procedure defined in the core infrastructure repository:
 
 **Reference:** 
-Complete **`vps-linux-hardening-paas/docs/05-cloudflare-waf-security.md` (Section 5.1: Domain Onboarding & Section 5.2: SSL/TLS Configuration)**.
+Complete **[`vps-linux-hardening-paas/docs/05-cloudflare-waf-security.md`](https://github.com/inok-it/vps-linux-hardening-paas/tree/main/docs/05-cloudflare-waf-security.md) 
+(Section 5.1: Domain Onboarding & Section 5.2: SSL/TLS Configuration)**.
 
 > [!Note]
 > **Production HSTS Graduation (12 Months & Preload)**
 > Our baseline infrastructure guide sets HSTS Max-Age to 6 months with Preload: Off to prevent accidental lockouts during initial setup. Once the WooCommerce store has operated stably over HTTPS for at least 30 days across all subdomains, navigate to SSL/TLS ➔ Edge Certificates ➔ HTTP Strict Transport Security (HSTS) and upgrade Max-Age to 12 months and set Preload to On.
 ###### Step 2: Configure WordPress Login Rate Limiting
-Adapt the generic Rate Limiting procedure from **`vps-linux-hardening-paas/docs/05-cloudflare-waf-security.md` (Section 4)** specifically for WordPress authentication endpoints:
+Adapt the generic Rate Limiting procedure from [**`vps-linux-hardening-paas/docs/05-cloudflare-waf-security.md` (Section 4)**](https://github.com/inok-it/vps-linux-hardening-paas/tree/main/docs/05-cloudflare-waf-security.md) specifically for WordPress authentication endpoints:
 1. In the Cloudflare dashboard, navigate to **Security** ➔ **Security Rules** (formerly WAF) ➔ **Rate limiting rules**.
 2. Click **Create rule** and set the name to `WP Hardening - Protect Login`.
 3. Configure the matching logic (**If incoming requests match...**):

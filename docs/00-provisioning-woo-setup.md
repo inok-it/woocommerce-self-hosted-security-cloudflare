@@ -37,7 +37,7 @@ SHOW DATABASES;
 Before proceeding to the application layer, immediately configure automated nightly backups to Cloudflare R2 for this database container.
 
 **Reference:** 
-Follow the exact procedure outlined in **`vps-linux-hardening-paas/docs/04-backup-recovery-policy.md` (Section 4.4: Application & Database Backups)**. Remember to stagger the Cron expression by 1 minute relative to existing backups.
+Follow the exact procedure outlined in  [**`vps-linux-hardening-paas/docs/04-backup-recovery-policy.md`**](https://github.com/inok-it/vps-linux-hardening-paas/tree/main/docs/04-backup-recovery-policy.md)(Section 4.4: Application & Database Backups)**. Remember to stagger the Cron expression by 1 minute relative to existing backups.
 ##### **Rationale:**
 **Single-Tenant Isolation:** 
 Running a dedicated MariaDB container per WooCommerce client ensures that heavy database locks (e.g., during massive product imports or seasonal traffic spikes) only impact that specific container, leaving other client databases untouched.
@@ -56,11 +56,11 @@ Deploy a standalone WordPress container with hardened PHP/WP constants, link it 
 2. Search for and select **WordPress (without database)**.
 3. **Version Pinning:** Change the image tag from `latest` to a specific, current version number (e.g., `6.7.2` or `7.1.2`). **Never use the `latest` tag in production.**
 
-    - _Reference:_ Container image updates will be tracked safely via notifications configured in **`vps-linux-hardening-paas/docs/03-monitoring-alerts.md` (Diun)**.
+    - _Reference:_ Container image updates will be tracked safely via notifications configured in [**`vps-linux-hardening-paas/docs/03-monitoring-alerts.md` (Diun)**](https://github.com/inok-it/vps-linux-hardening-paas/tree/main/docs/03-monitoring-alerts.md).
     
 4. In the **General** tab, set your target domain in the **Domains** field (e.g., `[https://store.yourdomain.com](https://store.yourdomain.com)`).
 
-    - _Reference:_ Ensure the domain is properly proxied through Cloudflare with strict SSL settings as defined in **`vps-linux-hardening-paas/docs/05-cloudflare-waf-security.md`**.
+    - _Reference:_ Ensure the domain is properly proxied through Cloudflare with strict SSL settings as defined in [**`vps-linux-hardening-paas/docs/05-cloudflare-waf-security.md`**](https://github.com/inok-it/vps-linux-hardening-paas/tree/main/docs/05-cloudflare-waf-security.md).
     
 5. Scroll down to the **Network** section and check the box: **Connect to Predefined Network**.
 ###### Step 2: Inject Environment Variables & Hardening Constants

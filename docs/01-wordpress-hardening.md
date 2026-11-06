@@ -111,7 +111,7 @@ Inject static cryptographic salts, suppress PHP error leakage in production, and
 > In the event of a security breach, immediately rotate these 8 salt values and redeploy the container. This instantly invalidates all active session cookies and forces every logged-in user (and attacker) to re-authenticate.
 ##### **Rationale:**
 **Minor Updates Only (`WP_AUTO_UPDATE_CORE`):** 
-Major WordPress releases frequently introduce breaking changes to WooCommerce templates and payment plugins. Restricting auto-updates to `minor` ensures zero-day security patches (e.g., `6.7.1` to `6.7.2`) install automatically while major upgrades remain controlled via container image pinning (monitored via Diun in `vps-linux-hardening-paas/docs/03-monitoring-alerts.md`).
+Major WordPress releases frequently introduce breaking changes to WooCommerce templates and payment plugins. Restricting auto-updates to `minor` ensures zero-day security patches (e.g., `6.7.1` to `6.7.2`) install automatically while major upgrades remain controlled via container image pinning (monitored via Diun in  [`vps-linux-hardening-paas/docs/03-monitoring-alerts.md`](https://github.com/inok-it/vps-linux-hardening-paas/tree/main/docs/03-monitoring-alerts.md).).
 
 **Suppressing `display_errors`:** 
 Publicly rendered PHP warnings leak full server directory paths and database schema structures, giving attackers reconnaissance data.
@@ -217,4 +217,4 @@ Protect administrator and shop manager accounts against credential stuffing and 
 
 ##### **Rationale:**
 **Defense in Depth:** 
-Even if an attacker bypasses Cloudflare Rate Limiting (`vps-linux-hardening-paas/docs/05-cloudflare-waf-security.md`) and compromises an administrator password via malware on a client's computer, they cannot access `/wp-admin` or export customer order data without the physical 2FA token.
+Even if an attacker bypasses Cloudflare Rate Limiting ([`vps-linux-hardening-paas/docs/05-cloudflare-waf-security.md`](https://github.com/inok-it/vps-linux-hardening-paas/tree/main/docs/05-cloudflare-waf-security.md)) and compromises an administrator password via malware on a client's computer, they cannot access `/wp-admin` or export customer order data without the physical 2FA token.

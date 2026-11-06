@@ -4,7 +4,7 @@ This module defines the multi-tiered backup architecture for a Single-Tenant Woo
 
 > [!Note] 
 > **Prerequisite Reference:** 
-> Before executing the steps below, ensure that the **Cloudflare R2 S3 Storage Destination** and **Host Disaster Recovery** policies are already initialized on your Coolify server as documented in **`vps-linux-hardening-paas/docs/04-backup-recovery-policy.md`**.
+> Before executing the steps below, ensure that the **Cloudflare R2 S3 Storage Destination** and **Host Disaster Recovery** policies are already initialized on your Coolify server as documented in .[**`vps-linux-hardening-paas/docs/04-backup-recovery-policy.md`**](https://github.com/inok-it/vps-linux-hardening-paas/tree/main/docs/04-backup-recovery-policy.md) 
 
 ## 5.1. Application Volume Backups (`/var/www/html`)
 
@@ -68,7 +68,7 @@ If a server suffers a catastrophic hardware failure at 18:00 and backups only ru
 Maintain a full-disk block-level snapshot of the entire Ubuntu 26.04 host server to enable rapid bare-metal recovery of the OS, Docker Engine, Coolify control plane, and all client containers simultaneously.
 ##### **Action:**
 1. Verify that automated host-level snapshots are enabled in your **OVH Public Cloud / VPS Control Panel** (or equivalent cloud provider dashboard).
-2. Follow the exact verification and restoration runbook detailed in **`vps-linux-hardening-paas/docs/04-backup-recovery-policy.md`.
+2. Follow the exact verification and restoration runbook detailed in [**`vps-linux-hardening-paas/docs/04-backup-recovery-policy.md`**](https://github.com/inok-it/vps-linux-hardening-paas/tree/main/docs/04-backup-recovery-policy.md).
 ##### **Rationale:**
 **RTO (Recovery Time Objective) Optimization:** 
 Rebuilding a failed Ubuntu host from scratch, reinstalling Coolify, and individually restoring 15 separate client MariaDB dumps and `/var/www/html` volumes can take several hours. Restoring a full VM snapshot at the OVH hypervisor layer brings the entire agency infrastructure back online in minutes, after which you only need to import the latest 6-hour MariaDB dump from Cloudflare R2 to synchronize recent WooCommerce orders.
